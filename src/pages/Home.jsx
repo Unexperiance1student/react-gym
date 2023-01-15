@@ -1,6 +1,15 @@
-import React from 'react';
+import { Box } from '@mui/material';
+import React, { useState } from 'react';
+import { Exercises, HeroBanner, SearchExercises } from '../components';
 
 const Home = () => {
-  return <div>Home</div>;
+  const [first, setfirst] = useState();
+  return (
+    <Box>
+      <HeroBanner />
+      <SearchExercises />
+      <Exercises />
+    </Box>
+  );
 };
 export default Home;
