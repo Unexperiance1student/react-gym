@@ -25,26 +25,22 @@ const HeroBanner = () => {
       <Typography
         fontSize='22px'
         fontFamily='Alegreya'
-        lineHeight='35px'>
+        lineHeight='35px'
+        mb={4}>
         Check out the most effective exercises personalized to you
       </Typography>
       <Stack>
-        <a
+        <Button
           href='#exercises'
-          style={{
-            marginTop: '45px',
-            textDecoration: 'none',
+          variant='contained'
+          color='error'
+          sx={{
+            backgroundColor: '#FF2625',
+            padding: '10px',
             width: '200px',
-            textAlign: 'center',
-            background: '#FF2625',
-            padding: '14px',
-            fontSize: '22px',
-            textTransform: 'none',
-            color: 'white',
-            borderRadius: '4px',
           }}>
           Explore Exercises
-        </a>
+        </Button>
       </Stack>
       <Typography
         fontWeight={600}
