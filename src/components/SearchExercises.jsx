@@ -14,10 +14,10 @@ const SearchExercises = ({ setExercises }) => {
   const [search, setSearch] = useState('');
   const { allExercises, allBodyParts, bodyPart, isExercisesLoading } =
     useSelector(selectExercises);
+
   useEffect(() => {
-    dispatch(fetchAllCategories('exercises/bodyPartList'));
+    dispatch(fetchAllCategories());
     setBodyParts(allBodyParts);
-    console.log(allBodyParts);
   }, []);
 
   const handleSearch = () => {
@@ -83,6 +83,7 @@ const SearchExercises = ({ setExercises }) => {
         <HorizontalScrollbar
           data={allBodyParts}
           bodyPart={bodyPart}
+          bodyParts={bodyParts}
         />
       </Box>
     </Stack>

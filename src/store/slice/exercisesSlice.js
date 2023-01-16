@@ -21,9 +21,9 @@ export const fetchExercises = createAsyncThunk(
 
 export const fetchAllCategories = createAsyncThunk(
   'exercises/fetchAllCategories',
-  async function (url) {
+  async function () {
     const { data } = await axios.get(
-      `https://exercisedb.p.rapidapi.com/${url}`,
+      'https://exercisedb.p.rapidapi.com/exercises/bodyPartList',
       options
     );
 
@@ -35,7 +35,7 @@ const initialState = {
   isExercisesLoading: false,
   allExercises: [],
   bodyPart: 'all',
-  allBodyParts: [],
+  allBodyParts: ['all'],
   exercisesError: null,
 };
 
@@ -55,7 +55,7 @@ const exercisesSlice = createSlice({
       })
       .addCase(fetchAllCategories.fulfilled, (state, action) => {
         state.isExercisesLoading = false;
-        state.allBodyParts = action.payload;
+        state.allBodyParts = ['all', ...action.payload];
       })
       .addCase(fetchExercises.pending, (state) => {
         state.isExercisesLoading = true;
