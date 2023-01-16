@@ -11,27 +11,22 @@ const options = {
 export const fetchExercises = createAsyncThunk(
   'exercises/fetchExercises',
   async function (url, { rejectWithValue }) {
-    const data = await axios.get(
+    const { data } = await axios.get(
       `https://exercisedb.p.rapidapi.com/${url}`,
       options
     );
-
-    if (!data.ok) {
-      return rejectWithValue('Server Error!');
-    }
     return data;
   }
 );
 
 export const fetchAllCategories = createAsyncThunk(
   'exercises/fetchAllCategories',
-  async function (_, { rejectWithValue }) {
-    const resp = await fetch(`http://localhost:3001/bodyPart`);
+  async function (url, { rejectWithValue }) {
+    const { data } = await axios.get(
+      `https://exercisedb.p.rapidapi.com/${url}`,
+      options
+    );
 
-    if (!resp.ok) {
-      return rejectWithValue('Server Error!');
-    }
-    const data = resp.json();
     return data;
   }
 );

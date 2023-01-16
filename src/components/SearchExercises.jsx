@@ -10,9 +10,10 @@ const SearchExercises = ({ setExercises }) => {
   const dispatch = useDispatch();
   const [bodyParts, setBodyParts] = useState([]);
   const [search, setSearch] = useState('');
-  const { allBodyParts, bodyPart } = useSelector(selectExercises);
+  const { allBodyParts, bodyPart, isExercisesLoading } =
+    useSelector(selectExercises);
   useEffect(() => {
-    dispatch(fetchAllCategories());
+    dispatch(fetchAllCategories('exercises/bodyPartList'));
     setBodyParts(allBodyParts);
     console.log(allBodyParts);
   }, []);
@@ -29,6 +30,7 @@ const SearchExercises = ({ setExercises }) => {
       );
       setSearch('');
       setExercises(searchedExercises);
+      console.log(searchedExercises);
     }
   };
   return (
@@ -77,10 +79,12 @@ const SearchExercises = ({ setExercises }) => {
         </Button>
       </Box>
       <Box sx={{ position: 'relative', width: '100%', p: '20px' }}>
-        <HorizontalScrollbar
-          data={allBodyParts}
-          bodyPart={bodyPart}
-        />
+        {!isExercisesLoading ? (
+          <HorizontalScrollbar
+            data={allBodyParts}
+            bodyPart={bodyPart}
+          />
+        ) : null}
       </Box>
     </Stack>
   );

@@ -36,7 +36,7 @@ const BodyPart = ({ item, bodyPart }) => {
         fontWeight='bold'
         color='#3a1212'
         textTransform='capitalize'>
-        {item.catory}
+        {item}
       </Typography>
     </Stack>
   );
