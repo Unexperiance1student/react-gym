@@ -8,24 +8,24 @@ const options = {
   },
 };
 
-export const fetchExercises = createAsyncThunk(
-  'exercises/fetchExercises',
-  async function (url, { rejectWithValue }) {
-    const data = await axios.get(
-      `https://exercisedb.p.rapidapi.com/${url}`,
-      options
-    );
+// export const fetchExercises = createAsyncThunk(
+//   'exercises/fetchExercises',
+//   async function (url, { rejectWithValue }) {
+//     const data = await axios.get(
+//       `https://exercisedb.p.rapidapi.com/${url}`,
+//       options
+//     );
 
-    if (!data.ok) {
-      return rejectWithValue('Server Error!');
-    }
-    return data;
-  }
-);
+//     if (!data.ok) {
+//       return rejectWithValue('Server Error!');
+//     }
+//     return data;
+//   }
+// );
 
 const initialState = {
   isExercisesLoading: false,
-  exercises: [],
+  allExercises: [],
   bodyPart: 'all',
   exercisesError: null,
 };
@@ -35,19 +35,19 @@ const exercisesSlice = createSlice({
   initialState,
   reducers: {},
   extraReducers: (builder) => {
-    builder
-      .addCase(fetchExercises.pending, (state) => {
-        state.isExercisesLoading = true;
-        state.postError = null;
-      })
-      .addCase(fetchExercises.fulfilled, (state, action) => {
-        state.isExercisesLoading = false;
-        state.exercises = action.payload;
-      })
-      .addMatcher(ispostError, (state, action) => {
-        state.exercisesError = action.error.name;
-        state.isExercisesLoading = false;
-      });
+    // builder
+    //   .addCase(fetchExercises.pending, (state) => {
+    //     state.isExercisesLoading = true;
+    //     state.postError = null;
+    //   })
+    //   .addCase(fetchExercises.fulfilled, (state, action) => {
+    //     state.isExercisesLoading = false;
+    //     state.allExercises = action.payload;
+    //   })
+    //   .addMatcher(ispostError, (state, action) => {
+    //     state.exercisesError = action.error.name;
+    //     state.isExercisesLoading = false;
+    //   });
   },
 });
 

@@ -4,7 +4,7 @@ export const BASE_URL = 'https://exercisedb.p.rapidapi.com';
 
 const options = {
   headers: {
-    'X-RapidAPI-Key': process.env.REACT_APP_RAPID_API_KEY,
+    'X-RapidAPI-Key': '99eae3ab46msh6f6966e456b056fp14468cjsn763f37c567dd',
     'X-RapidAPI-Host': 'exercisedb.p.rapidapi.com',
   },
 };

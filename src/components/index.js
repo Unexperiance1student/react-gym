@@ -1,4 +1,5 @@
 import BodyPart from './BodyPart';
+import ExerciseCard from './ExerciseCard';
 import Exercises from './Exercises';
 import Footer from './Footer';
 import HeroBanner from './HeroBanner';
@@ -14,4 +15,5 @@ export {
   SearchExercises,
   Exercises,
   HorizontalScrollbar,
+  ExerciseCard,
 };
