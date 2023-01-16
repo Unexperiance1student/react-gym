@@ -2,15 +2,17 @@ import { Box, Button, Stack, TextField, Typography } from '@mui/material';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectExercises } from '../store/selectors/exercisesSelector';
-import { fetchAllCategories } from '../store/slice/exercisesSlice';
-import { fetchData } from '../utils/fetchData';
+import {
+  fetchAllCategories,
+  fetchExercises,
+} from '../store/slice/exercisesSlice';
 import HorizontalScrollbar from './HorizontalScrollbar';
 
 const SearchExercises = ({ setExercises }) => {
   const dispatch = useDispatch();
   const [bodyParts, setBodyParts] = useState([]);
   const [search, setSearch] = useState('');
-  const { allBodyParts, bodyPart, isExercisesLoading } =
+  const { allExercises, allBodyParts, bodyPart, isExercisesLoading } =
     useSelector(selectExercises);
   useEffect(() => {
     dispatch(fetchAllCategories('exercises/bodyPartList'));
@@ -18,10 +20,10 @@ const SearchExercises = ({ setExercises }) => {
     console.log(allBodyParts);
   }, []);
 
-  const handleSearch = async () => {
+  const handleSearch = () => {
     if (search) {
-      const exercisesData = await fetchData('exercises');
-      const searchedExercises = exercisesData.filter(
+      dispatch(fetchExercises('exercises'));
+      const searchedExercises = allExercises.filter(
         (exercise) =>
           exercise.name.toLowerCase().includes(search) ||
           exercise.target.toLowerCase().includes(search) ||
@@ -30,7 +32,6 @@ const SearchExercises = ({ setExercises }) => {
       );
       setSearch('');
       setExercises(searchedExercises);
-      console.log(searchedExercises);
     }
   };
   return (
@@ -79,12 +80,10 @@ const SearchExercises = ({ setExercises }) => {
         </Button>
       </Box>
       <Box sx={{ position: 'relative', width: '100%', p: '20px' }}>
-        {!isExercisesLoading ? (
-          <HorizontalScrollbar
-            data={allBodyParts}
-            bodyPart={bodyPart}
-          />
-        ) : null}
+        <HorizontalScrollbar
+          data={allBodyParts}
+          bodyPart={bodyPart}
+        />
       </Box>
     </Stack>
   );

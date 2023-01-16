@@ -10,7 +10,7 @@ const options = {
 
 export const fetchExercises = createAsyncThunk(
   'exercises/fetchExercises',
-  async function (url, { rejectWithValue }) {
+  async function (url) {
     const { data } = await axios.get(
       `https://exercisedb.p.rapidapi.com/${url}`,
       options
@@ -21,7 +21,7 @@ export const fetchExercises = createAsyncThunk(
 
 export const fetchAllCategories = createAsyncThunk(
   'exercises/fetchAllCategories',
-  async function (url, { rejectWithValue }) {
+  async function (url) {
     const { data } = await axios.get(
       `https://exercisedb.p.rapidapi.com/${url}`,
       options
