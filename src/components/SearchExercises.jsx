@@ -1,19 +1,20 @@
 import { Box, Button, Stack, TextField, Typography } from '@mui/material';
 import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { selectExercises } from '../store/selectors/exercisesSelector';
+import { fetchAllCategories } from '../store/slice/exercisesSlice';
 import { fetchData } from '../utils/fetchData';
 import HorizontalScrollbar from './HorizontalScrollbar';
 
-const SearchExercises = ({ bodyPart, setBodyPart, setExercises }) => {
+const SearchExercises = ({ setExercises }) => {
+  const dispatch = useDispatch();
   const [bodyParts, setBodyParts] = useState([]);
   const [search, setSearch] = useState('');
-
+  const { allBodyParts, bodyPart } = useSelector(selectExercises);
   useEffect(() => {
-    const fetchExercisesData = async () => {
-      const bodyPartsData = await fetchData('exercises/bodyPartList');
-      setBodyParts(['all', ...bodyPartsData]);
-      console.log(bodyParts);
-    };
-    fetchExercisesData();
+    dispatch(fetchAllCategories());
+    setBodyParts(allBodyParts);
+    console.log(allBodyParts);
   }, []);
 
   const handleSearch = async () => {
@@ -77,10 +78,8 @@ const SearchExercises = ({ bodyPart, setBodyPart, setExercises }) => {
       </Box>
       <Box sx={{ position: 'relative', width: '100%', p: '20px' }}>
         <HorizontalScrollbar
-          bodyParts={bodyParts}
-          data={bodyParts}
+          data={allBodyParts}
           bodyPart={bodyPart}
-          setBodyPart={setBodyPart}
         />
       </Box>
     </Stack>

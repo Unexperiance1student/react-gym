@@ -1,8 +1,12 @@
 import React from 'react';
 import { Stack, Typography } from '@mui/material';
 import Icon from '../assets/icons/gym.png';
+import { useDispatch } from 'react-redux';
+import { setBodyPart } from '../store/slice/exercisesSlice';
 
-const BodyPart = ({ item, bodyPart, setBodyPart }) => {
+const BodyPart = ({ item, bodyPart }) => {
+  const dispatch = useDispatch();
+
   return (
     <Stack
       type='button'
@@ -19,7 +23,7 @@ const BodyPart = ({ item, bodyPart, setBodyPart }) => {
         gap: '47px',
       }}
       onClick={() => {
-        setBodyPart(item);
+        dispatch(setBodyPart(item));
         window.scrollTo({ top: 1800, left: 100, behavior: 'smooth' });
       }}>
       <img
@@ -32,7 +36,7 @@ const BodyPart = ({ item, bodyPart, setBodyPart }) => {
         fontWeight='bold'
         color='#3a1212'
         textTransform='capitalize'>
-        {item}
+        {item.catory}
       </Typography>
     </Stack>
   );

@@ -8,46 +8,72 @@ const options = {
   },
 };
 
-// export const fetchExercises = createAsyncThunk(
-//   'exercises/fetchExercises',
-//   async function (url, { rejectWithValue }) {
-//     const data = await axios.get(
-//       `https://exercisedb.p.rapidapi.com/${url}`,
-//       options
-//     );
+export const fetchExercises = createAsyncThunk(
+  'exercises/fetchExercises',
+  async function (url, { rejectWithValue }) {
+    const data = await axios.get(
+      `https://exercisedb.p.rapidapi.com/${url}`,
+      options
+    );
 
-//     if (!data.ok) {
-//       return rejectWithValue('Server Error!');
-//     }
-//     return data;
-//   }
-// );
+    if (!data.ok) {
+      return rejectWithValue('Server Error!');
+    }
+    return data;
+  }
+);
+
+export const fetchAllCategories = createAsyncThunk(
+  'exercises/fetchAllCategories',
+  async function (_, { rejectWithValue }) {
+    const resp = await fetch(`http://localhost:3001/bodyPart`);
+
+    if (!resp.ok) {
+      return rejectWithValue('Server Error!');
+    }
+    const data = resp.json();
+    return data;
+  }
+);
 
 const initialState = {
   isExercisesLoading: false,
   allExercises: [],
   bodyPart: 'all',
+  allBodyParts: [],
   exercisesError: null,
 };
 
 const exercisesSlice = createSlice({
   name: 'exercises',
   initialState,
-  reducers: {},
+  reducers: {
+    setBodyPart(state, action) {
+      state.bodyPart = action.payload;
+    },
+  },
   extraReducers: (builder) => {
-    // builder
-    //   .addCase(fetchExercises.pending, (state) => {
-    //     state.isExercisesLoading = true;
-    //     state.postError = null;
-    //   })
-    //   .addCase(fetchExercises.fulfilled, (state, action) => {
-    //     state.isExercisesLoading = false;
-    //     state.allExercises = action.payload;
-    //   })
-    //   .addMatcher(ispostError, (state, action) => {
-    //     state.exercisesError = action.error.name;
-    //     state.isExercisesLoading = false;
-    //   });
+    builder
+      .addCase(fetchAllCategories.pending, (state) => {
+        state.isExercisesLoading = true;
+        state.postError = null;
+      })
+      .addCase(fetchAllCategories.fulfilled, (state, action) => {
+        state.isExercisesLoading = false;
+        state.allBodyParts = action.payload;
+      })
+      .addCase(fetchExercises.pending, (state) => {
+        state.isExercisesLoading = true;
+        state.postError = null;
+      })
+      .addCase(fetchExercises.fulfilled, (state, action) => {
+        state.isExercisesLoading = false;
+        state.allExercises = action.payload;
+      })
+      .addMatcher(ispostError, (state, action) => {
+        state.exercisesError = action.error.name;
+        state.isExercisesLoading = false;
+      });
   },
 });
 
@@ -56,4 +82,4 @@ function ispostError(action) {
 }
 
 export default exercisesSlice.reducer;
-export const {} = exercisesSlice.actions;
+export const { setBodyPart } = exercisesSlice.actions;

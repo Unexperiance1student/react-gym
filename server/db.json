@@ -1,0 +1,44 @@
+{
+    "bodyPart":[
+        {
+        "id":1,
+        "catory": "back"
+        },
+     {
+        "id":2,
+        "catory": "cardio"
+        },
+         {
+        "id":3,
+        "catory": "chest"
+        },
+         {
+        "id":4,
+        "catory": "lower arms"
+        },
+         {
+        "id":5,
+        "catory": "lower legs"
+        },
+         {
+        "id":6,
+        "catory": "neck"
+        },
+         {
+        "id":7,
+        "catory": "shoulders"
+        },
+         {
+        "id":8,
+        "catory": "upper arms"
+        },
+         {
+        "id":9,
+        "catory": "upper legs"
+        },
+        {
+        "id":10,
+        "catory": "waist"
+        }
+    ]
+}
