@@ -50,6 +50,7 @@ const Exercises = ({ setExercises, exercises }) => {
         mb='46px'>
         Showing Results
       </Typography>
+
       <Stack
         direction='row'
         sx={{ gap: { lg: '110px', xs: '50px' } }}
