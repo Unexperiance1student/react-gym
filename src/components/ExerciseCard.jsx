@@ -3,13 +3,14 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 const ExerciseCard = ({ exercise }) => {
+  const { gifUrl, name, bodyPart, target, id } = exercise;
   return (
     <Link
       className='exercise-card'
-      to={`/exercise/${exercise.id}`}>
+      to={`/exercise/${id}`}>
       <img
-        src={exercise.gifUrl}
-        alt={exercise.name}
+        src={gifUrl}
+        alt={name}
         loading='lazy'
       />
       <Stack direction='row'>
@@ -22,7 +23,7 @@ const ExerciseCard = ({ exercise }) => {
             borderRadius: '20px',
             textTransform: 'capitalize',
           }}>
-          {exercise.bodyPart}
+          {bodyPart}
         </Button>
         <Button
           sx={{
@@ -33,7 +34,7 @@ const ExerciseCard = ({ exercise }) => {
             borderRadius: '20px',
             textTransform: 'capitalize',
           }}>
-          {exercise.target}
+          {target}
         </Button>
       </Stack>
       <Typography
@@ -44,7 +45,7 @@ const ExerciseCard = ({ exercise }) => {
         mt='11px'
         pb='10px'
         textTransform='capitalize'>
-        {exercise.name}
+        {name}
       </Typography>
     </Link>
   );
